@@ -1,0 +1,29 @@
+SupplierName,spend_rank,spend_lakh,otif_pct,avg_requested_increase_pct,cost_requests,segment
+Chola Hygiene Pvt Ltd,1,347.71,73.3,5.79,42,Review
+Sundaram Equipment Pvt Ltd,9,251.13,74.1,5.13,56,Review
+Vaigai Pulses Pvt Ltd,10,249.9,70.4,5.69,42,Review
+Ooty Tea Traders Pvt Ltd,19,143.77,73.9,6.77,24,Review
+Konkan Beverages Pvt Ltd,21,119.88,72.5,7.45,29,Review
+Madras Cartons Pvt Ltd,26,18.66,71.4,5.43,21,Review
+Deccan Packaging & Co,27,18.62,72.2,5.2,37,Review
+Kaveri Agro & Co,2,323.08,85.6,4.87,48,Strategic
+Eastern Machinery & Co,3,294.66,87.6,5.38,41,Strategic
+Malabar Spices Pvt Ltd,4,287.87,87.3,4.59,40,Strategic
+Thanjavur Rice Mills & Co,5,281.62,83.5,6.13,26,Strategic
+Pondy Bakeware & Co,6,274.79,93.8,4.4,75,Strategic
+Salem Steelware & Co,7,267.25,80.4,6.06,31,Strategic
+Tanjore Grains & Co,8,262.13,84.9,5.17,42,Strategic
+Hosur Refrigeration Pvt Ltd,11,230.14,79.5,5.37,29,Maintain
+Sri Lakshmi Foods & Co,12,228.99,91.7,4.42,41,Maintain
+Coromandel Foods Pvt Ltd,13,202.97,82.2,5.82,27,Maintain
+Nilgiri Dairy Pvt Ltd,14,179.77,87.0,5.22,34,Maintain
+Bharat Cold Chain & Co,15,169.31,78.9,5.37,37,Maintain
+Arcot Snacks Pvt Ltd,16,169.16,76.6,5.76,33,Maintain
+Mysore Sweets Pvt Ltd,17,154.56,80.1,5.49,23,Maintain
+Kongu Textiles & Co,18,153.65,85.7,4.58,27,Maintain
+Annapurna Oils Pvt Ltd,20,131.58,84.2,5.48,15,Maintain
+Cauvery Fruits Pvt Ltd,22,79.41,90.1,4.66,37,Maintain
+Karaikal Seafood Pvt Ltd,23,74.75,87.5,5.89,19,Maintain
+Palar Fresh Pvt Ltd,24,47.8,94.1,3.86,25,Maintain
+Vellore Plastics Pvt Ltd,25,25.96,91.4,4.57,29,Maintain
+Trichy Paper Pvt Ltd,28,16.68,76.9,5.44,13,Maintain

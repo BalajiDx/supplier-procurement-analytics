@@ -1,0 +1,29 @@
+rnk,SupplierName,spend_lakh,cumulative_pct,abc_class
+1,Chola Hygiene Pvt Ltd,347.71,6.9,A
+2,Kaveri Agro & Co,323.08,13.4,A
+3,Eastern Machinery & Co,294.66,19.3,A
+4,Malabar Spices Pvt Ltd,287.87,25.0,A
+5,Thanjavur Rice Mills & Co,281.62,30.7,A
+6,Pondy Bakeware & Co,274.79,36.2,A
+7,Salem Steelware & Co,267.25,41.5,A
+8,Tanjore Grains & Co,262.13,46.7,A
+9,Sundaram Equipment Pvt Ltd,251.13,51.7,A
+10,Vaigai Pulses Pvt Ltd,249.9,56.7,A
+11,Hosur Refrigeration Pvt Ltd,230.14,61.3,A
+12,Sri Lakshmi Foods & Co,228.99,65.9,A
+13,Coromandel Foods Pvt Ltd,202.97,70.0,A
+14,Nilgiri Dairy Pvt Ltd,179.77,73.6,A
+15,Bharat Cold Chain & Co,169.31,76.9,A
+16,Arcot Snacks Pvt Ltd,169.16,80.3,A
+17,Mysore Sweets Pvt Ltd,154.56,83.4,B
+18,Kongu Textiles & Co,153.65,86.5,B
+19,Ooty Tea Traders Pvt Ltd,143.77,89.3,B
+20,Annapurna Oils Pvt Ltd,131.58,92.0,B
+21,Konkan Beverages Pvt Ltd,119.88,94.4,B
+22,Cauvery Fruits Pvt Ltd,79.41,96.0,B
+23,Karaikal Seafood Pvt Ltd,74.75,97.4,C
+24,Palar Fresh Pvt Ltd,47.8,98.4,C
+25,Vellore Plastics Pvt Ltd,25.96,98.9,C
+26,Madras Cartons Pvt Ltd,18.66,99.3,C
+27,Deccan Packaging & Co,18.62,99.7,C
+28,Trichy Paper Pvt Ltd,16.68,100.0,C

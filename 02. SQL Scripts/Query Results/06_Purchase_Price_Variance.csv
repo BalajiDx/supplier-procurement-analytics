@@ -1,0 +1,17 @@
+Category,year,price_vs_contract_pct,ppv_lakh
+Beverages,2023,4.45,5.69
+Beverages,2024,10.3,12.17
+Cleaning,2023,4.6,10.31
+Cleaning,2024,10.91,26.28
+Dairy,2023,4.75,4.45
+Dairy,2024,10.83,7.99
+Equipment,2023,4.6,29.88
+Equipment,2024,10.48,60.55
+Food,2023,4.69,50.83
+Food,2024,10.41,109.13
+Fresh Produce,2023,4.86,4.43
+Fresh Produce,2024,10.83,10.39
+Logistics,2023,4.9,3.73
+Logistics,2024,10.4,8.43
+Packaging,2023,4.62,1.71
+Packaging,2024,10.66,3.97

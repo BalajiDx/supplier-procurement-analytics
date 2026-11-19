@@ -1,0 +1,29 @@
+SupplierID,SupplierName,Category,Region,PaymentTermsDays,OnboardDate
+SUP001,KAVERI AGRO & CO  ,Food,Tamil Nadu,60,2018-03-20
+SUP002,Coromandel Foods Pvt Ltd,Food,Tamil Nadu,15,2020-10-24
+SUP003,NILGIRI DAIRY PVT LTD  ,Dairy,Karnataka,15,2018-09-30
+SUP004,DECCAN PACKAGING & CO  ,Packaging,Tamil Nadu,15,2020-06-23
+SUP005,Malabar Spices Pvt Ltd,Food,Karnataka,30,2020-08-06
+SUP006,Palar Fresh Pvt Ltd,Fresh Produce,Tamil Nadu,60,2020-03-14
+SUP007,Bharat Cold Chain & Co,Logistics,Puducherry,30,2017-07-03
+SUP008,Sundaram Equipment Pvt Ltd,Equipment,Tamil Nadu,45,2022-05-21
+SUP009,VELLORE PLASTICS PVT LTD  ,Packaging,Tamil Nadu,15,2019-12-28
+SUP010,Tanjore Grains & Co,Food,Tamil Nadu,30,2021-10-27
+SUP011,Konkan Beverages Pvt Ltd,Beverages,Puducherry,30,2018-10-25
+SUP012,Annapurna Oils Pvt Ltd,Food,Tamil Nadu,45,2016-03-16
+SUP013,Pondy Bakeware & Co,Equipment,Tamil Nadu,45,2022-09-04
+SUP014,Chola Hygiene Pvt Ltd,Cleaning,Tamil Nadu,30,2022-11-20
+SUP015,Cauvery Fruits Pvt Ltd,Fresh Produce,Kerala,30,2021-03-08
+SUP016,Eastern Machinery & Co,Equipment,Karnataka,30,2019-01-06
+SUP017,Madras Cartons Pvt Ltd,Packaging,Puducherry,30,2020-05-19
+SUP018,Ooty Tea Traders Pvt Ltd,Beverages,Tamil Nadu,30,2018-01-25
+SUP019,Sri Lakshmi Foods & Co,Food,Karnataka,45,2017-08-07
+SUP020,ARCOT SNACKS PVT LTD  ,Food,Tamil Nadu,60,2022-01-30
+SUP021,Mysore Sweets Pvt Ltd,Food,Puducherry,45,2017-07-24
+SUP022,Kongu Textiles & Co,Cleaning,Tamil Nadu,15,2022-06-06
+SUP023,Hosur Refrigeration Pvt Ltd,Equipment,Puducherry,45,2020-03-27
+SUP024,Vaigai Pulses Pvt Ltd,Food,Kerala,15,2021-05-28
+SUP025,Salem Steelware & Co,Equipment,Karnataka,15,2017-03-24
+SUP026,Trichy Paper Pvt Ltd,Packaging,Tamil Nadu,45,2021-01-13
+SUP027,Karaikal Seafood Pvt Ltd,Fresh Produce,Puducherry,30,2021-01-08
+SUP028,Thanjavur Rice Mills & Co,Food,Tamil Nadu,45,2016-01-27

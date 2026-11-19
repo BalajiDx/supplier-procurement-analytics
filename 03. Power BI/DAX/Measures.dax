@@ -1,0 +1,146 @@
+// =====================================================================
+// Supplier & Procurement Analytics - DAX
+// Tables : Suppliers, Products, PurchaseOrders, ChangeRequests, Calendar
+// NOTE   : Written against the model in Dashboard Images/4.Data_Model.png.
+//          Not executed in this repo's build environment - check each result against
+//          02. SQL Scripts/Query Results/ after loading the data.
+// =====================================================================
+
+// ---------------------------------------------------------------------
+// 1. CALENDAR TABLE  (mark as date table; Calendar[Date] -> PurchaseOrders[OrderDate] active,
+//    Calendar[Date] -> ChangeRequests[Submitted Date] inactive)
+// ---------------------------------------------------------------------
+Calendar =
+ADDCOLUMNS (
+    CALENDAR ( DATE ( 2023, 1, 1 ), DATE ( 2024, 12, 31 ) ),
+    "Year",       YEAR ( [Date] ),
+    "Month",      FORMAT ( [Date], "MMM yyyy" ),
+    "Month Sort", YEAR ( [Date] ) * 100 + MONTH ( [Date] )
+)
+
+// ---------------------------------------------------------------------
+// 2. CALCULATED COLUMNS
+// ---------------------------------------------------------------------
+// PurchaseOrders[Spend]
+Spend = PurchaseOrders[QtyReceived] * PurchaseOrders[UnitCost]
+
+// PurchaseOrders[Is On Time]
+Is On Time = IF ( PurchaseOrders[IsOpen] = 0 && PurchaseOrders[ReceivedDate] <= PurchaseOrders[PromisedDate], 1, 0 )
+
+// PurchaseOrders[Is In Full]
+Is In Full = IF ( PurchaseOrders[IsOpen] = 0 && PurchaseOrders[QtyReceived] >= PurchaseOrders[QtyOrdered], 1, 0 )
+
+// PurchaseOrders[Price Variance]   (paid minus contract, for the received quantity)
+Price Variance =
+( PurchaseOrders[UnitCost] - RELATED ( Products[ContractCost] ) ) * PurchaseOrders[QtyReceived]
+
+// ChangeRequests[Submitted Date]
+Submitted Date = DATEVALUE ( ChangeRequests[SubmittedAt] )
+
+// ChangeRequests[Change Band]   (sort by Change Band Sort)
+Change Band =
+SWITCH (
+    TRUE (),
+    ISBLANK ( ChangeRequests[ChangePct] ), "Not a cost change",
+    ChangeRequests[ChangePct] < 0,  "Decrease",
+    ChangeRequests[ChangePct] < 3,  "0-3%",
+    ChangeRequests[ChangePct] < 6,  "3-6%",
+    ChangeRequests[ChangePct] < 10, "6-10%",
+    "10%+"
+)
+Change Band Sort =
+SWITCH ( ChangeRequests[Change Band], "Decrease", 1, "0-3%", 2, "3-6%", 3, "6-10%", 4, "10%+", 5, 6 )
+
+// ---------------------------------------------------------------------
+// 3. MEASURES - Spend   (display folder: Spend)
+// ---------------------------------------------------------------------
+Total Spend =
+CALCULATE ( SUM ( PurchaseOrders[Spend] ), PurchaseOrders[IsOpen] = 0 )
+
+Spend PY =
+CALCULATE ( [Total Spend], SAMEPERIODLASTYEAR ( Calendar[Date] ) )
+
+Spend YoY % =
+DIVIDE ( [Total Spend] - [Spend PY], [Spend PY] )
+
+Spend Share % =
+DIVIDE ( [Total Spend], CALCULATE ( [Total Spend], ALL ( Suppliers ) ) )
+
+Spend 3M Avg =
+AVERAGEX (
+    DATESINPERIOD ( Calendar[Date], MAX ( Calendar[Date] ), -3, MONTH ),
+    [Total Spend]
+)
+
+Purchase Price Variance =
+CALCULATE ( SUM ( PurchaseOrders[Price Variance] ), PurchaseOrders[IsOpen] = 0 )
+
+Price vs Contract % =
+DIVIDE (
+    [Total Spend],
+    CALCULATE (
+        SUMX ( PurchaseOrders, PurchaseOrders[QtyReceived] * RELATED ( Products[ContractCost] ) ),
+        PurchaseOrders[IsOpen] = 0
+    )
+) - 1
+
+// Pareto: cumulative share of spend for the supplier in context
+Cumulative Spend % =
+VAR CurrentSpend = [Total Spend]
+VAR Cum =
+    SUMX (
+        FILTER ( ALL ( Suppliers[SupplierName] ), [Total Spend] >= CurrentSpend ),
+        [Total Spend]
+    )
+RETURN DIVIDE ( Cum, CALCULATE ( [Total Spend], ALL ( Suppliers ) ) )
+
+Open PO Count = CALCULATE ( COUNTROWS ( PurchaseOrders ), PurchaseOrders[IsOpen] = 1 )
+
+// ---------------------------------------------------------------------
+// 4. MEASURES - Supplier performance   (display folder: Performance)
+// ---------------------------------------------------------------------
+Delivered POs = CALCULATE ( COUNTROWS ( PurchaseOrders ), PurchaseOrders[IsOpen] = 0 )
+
+On Time % = DIVIDE ( SUM ( PurchaseOrders[Is On Time] ), [Delivered POs] )
+
+In Full % = DIVIDE ( SUM ( PurchaseOrders[Is In Full] ), [Delivered POs] )
+
+OTIF % =
+DIVIDE (
+    COUNTROWS ( FILTER ( PurchaseOrders, PurchaseOrders[Is On Time] = 1 && PurchaseOrders[Is In Full] = 1 ) ),
+    [Delivered POs]
+)
+
+Reject % = DIVIDE ( SUM ( PurchaseOrders[QtyRejected] ), SUM ( PurchaseOrders[QtyReceived] ) )
+
+Vendor Segment =
+VAR Otif = [OTIF %]
+VAR Ask = [Avg Requested Increase %]
+VAR SpendRank = RANKX ( ALL ( Suppliers[SupplierName] ), [Total Spend],, DESC )
+RETURN
+    IF ( HASONEVALUE ( Suppliers[SupplierName] ),
+        SWITCH ( TRUE (),
+            Otif < 0.75 || Ask > 6.5, "Review",
+            SpendRank <= 10, "Strategic",
+            "Maintain" ) )
+
+// ---------------------------------------------------------------------
+// 5. MEASURES - Change requests   (display folder: Change Requests)
+// ---------------------------------------------------------------------
+Change Requests = COUNTROWS ( ChangeRequests )
+
+Approved % = DIVIDE ( CALCULATE ( [Change Requests], ChangeRequests[Decision] = "Approved" ), [Change Requests] )
+
+Rejected % = DIVIDE ( CALCULATE ( [Change Requests], ChangeRequests[Decision] = "Rejected" ), [Change Requests] )
+
+Within 24h % = DIVIDE ( SUM ( ChangeRequests[DecidedWithin24h] ), [Change Requests] )
+
+Missed 24h = [Change Requests] - SUM ( ChangeRequests[DecidedWithin24h] )
+
+Avg Decision Hours = AVERAGE ( ChangeRequests[HoursToDecision] )
+
+Avg Requested Increase % = AVERAGE ( ChangeRequests[ChangePct] )
+
+// Requests by submission month (uses the inactive relationship)
+Change Requests by Submitted =
+CALCULATE ( [Change Requests], USERELATIONSHIP ( Calendar[Date], ChangeRequests[Submitted Date] ) )
